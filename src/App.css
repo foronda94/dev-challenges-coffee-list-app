@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #111315;
+}
+
+body {
+  transition: background-color 0.5s ease; /* Transición suave para el cambio de color de fondo */
+}
