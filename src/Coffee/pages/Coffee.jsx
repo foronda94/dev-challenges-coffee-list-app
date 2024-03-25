@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
-import '../../App.css';
+import React, { useState, useEffect } from 'react';
 import bgImg from  "../../assets/img/bg-cafe.jpg";
 import vectorImg from '../../assets/img/vector.svg';
 import { CardCoffee } from '../components/CardCoffee';
 import { FilterButtons } from '../components/FilterButtons';
 import { useCoffeeList } from '../hooks/useCoffeeList';
 import { Coffe } from '../../styled-component/CoffelistStyle';
+import '../../App.css';
 
 export const Coffee = () => {
-  console.log('componente reload coffee');
+  
+  const [currentData, setCurrentData] = useState([]);
+  const [onSkeleton, setOnSkeleton] = useState(1);
 
-  const { filteredCoffeeData } = useCoffeeList();
-  console.log('coffeeData-1', filteredCoffeeData);
-
-  const [currentData, setCurrentData] = useState([])
-
+  useEffect(() => {
+    setTimeout(() => {
+      setOnSkeleton(0)
+    }, 1000);
+  }, [currentData])
+  
+  
   return (
     <Coffe className='container'>
       <img className='coffee-list__image-header' src={bgImg} alt="coffe-list"/>
@@ -30,8 +34,8 @@ export const Coffee = () => {
 
           </div>
         </div>
-        <FilterButtons setCurrentData={ setCurrentData }/>
-        <CardCoffee currentData={ currentData} />
+        <FilterButtons setCurrentData={ setCurrentData } setOnSkeleton={ setOnSkeleton }/>
+        <CardCoffee currentData={ currentData } onSkeleton={ onSkeleton }/>
       </div>
     </Coffe>
   )

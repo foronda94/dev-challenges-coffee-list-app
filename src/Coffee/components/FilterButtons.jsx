@@ -3,7 +3,7 @@ import '../../App.css';
 import { useCoffeeList } from '../hooks/useCoffeeList';
 import { ButtonFilter } from '../../styled-component/CoffelistStyle';
 
-export const FilterButtons = ({setCurrentData}) => {
+export const FilterButtons = ({setCurrentData, setOnSkeleton}) => {
 
     const [activeFilter, setActiveFilter] = useState('allProducts');
     const { filteredCoffeeData, filterListCoffee } = useCoffeeList();
@@ -11,14 +11,12 @@ export const FilterButtons = ({setCurrentData}) => {
     const handleFilterClick = (filter) => {
         setActiveFilter(filter);
         filterListCoffee(filter);
+        setOnSkeleton(1);
     }
 
     useEffect(() => {
       setCurrentData(filteredCoffeeData);
     }, [filteredCoffeeData])
-    
-    
-    console.log('filteresbuton', filteredCoffeeData);
 
   return (
     <ButtonFilter className="filter-buttons">
